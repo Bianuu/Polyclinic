@@ -1,0 +1,20 @@
+JScrollPane scrollPane2 = new JScrollPane();
+        scrollPane2.setBounds(50, 350, 700, 164);
+        panel_orar.add(scrollPane2);
+
+        JTable table4 = new JTable();
+        scrollPane2.setViewportView(table4);
+
+        try {
+            db = new MySQL_Connect();
+            connection = db.getConnection();
+            selectStatement2 = connection.createStatement();
+
+            selectStatement2.execute("SELECT * FROM unitate_medicala");
+            rs = selectStatement2.getResultSet();
+            table4.setModel(DbUtils.resultSetToTableModel(rs));
+            unitate.setText("");
+            connection.close();
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        }
